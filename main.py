@@ -1,5 +1,7 @@
 import requests
 from fastapi import FastAPI
+const port = process.env.PORT || 4000 
+
 
 app = FastAPI()
 
