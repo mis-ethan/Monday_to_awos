@@ -39,7 +39,7 @@ async def get_group_items():
     """
     variables = {"board_id": board_id, "group_id": group_id}
 
-    HEADERS = {'Authorization': MONDAY_API_TOKEN}
+    HEADERS = {'Authorization': API_KEY}
 
     async with httpx.AsyncClient() as client:
         response = await client.post(
