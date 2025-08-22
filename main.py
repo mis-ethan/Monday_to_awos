@@ -39,13 +39,13 @@ async def get_group_items():
     """
     variables = {"board_id": board_id, "group_id": group_id}
 
-    headers = {'Authorization': MONDAY_API_TOKEN}
+    HEADERS = {'Authorization': MONDAY_API_TOKEN}
 
     async with httpx.AsyncClient() as client:
         response = await client.post(
             MONDAY_API_URL,
             json={"query": query, "variables": variables},
-            headers,
+            headers = HEADERS,
         )
 
     if response.status_code != 200:
