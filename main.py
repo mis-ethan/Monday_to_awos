@@ -14,7 +14,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to my API"}
+    return {"message": "Welcome to my API: " + API_KEY}
 
 
 @app.get("/create-workorders/")
@@ -40,7 +40,8 @@ async def get_group_items():
     """
     variables = {"board_id": board_id, "group_id": group_id}
 
-    HEADERS = {'Authorization': API_KEY}
+    HEADERS = {'Authorization': API_KEY,
+              "Content-Type": "application/json"}
 
     async with httpx.AsyncClient() as client:
         response = await client.post(
