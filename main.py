@@ -3,7 +3,7 @@ import os
 import json
 from fastapi import FastAPI
 
-API_KEY = os.getenv("MONDAY_API_KEY")
+API_KEY = os.getenv("MONDAY_API_TOKEN")
 IPAD_BOARD = os.getenv("IPAD_DEPLOYMENT_BOARD")
 REQUEST_GROUP = "group_mkt4473j"
 
