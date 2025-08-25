@@ -23,16 +23,18 @@ async def get_group_items():
     board_id = IPAD_BOARD
     group_id = REQUEST_GROUP
     query = """
-    query ($board_id: Int!, $group_id: String!) {
+    query ($board_id: ID!, $group_id: String!) {
       boards(ids: [$board_id]) {
         groups(ids: [$group_id]) {
-          items {
-            id
-            name
-            column_values {
+          items_page{
+            items {
               id
-              title
-              text
+              name
+              column_values {
+                id
+                title
+                text
+              }
             }
           }
         }
