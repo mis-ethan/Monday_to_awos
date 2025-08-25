@@ -2,6 +2,7 @@ import httpx
 import os
 import json
 from fastapi import FastAPI
+from fastapi import HTTPException
 
 API_KEY = os.getenv("MONDAY_API_TOKEN")
 IPAD_BOARD = os.getenv("IPAD_DEPLOYMENT_BOARD")
