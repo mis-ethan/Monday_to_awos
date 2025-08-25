@@ -73,10 +73,10 @@ async def get_group_items():
             result.append({
                 #"item_id": item["id"],
                 #"name": item["name"],
-                "item_num": " ".join(i + "\n") 
-                name
-                location
-                supervisor
+                "item_num": i + "\n", 
+                name,
+                location,
+                supervisor,
                 #"columns": {col["title"]: col["text"] for col in item["column_values"]}
             })
         return result
