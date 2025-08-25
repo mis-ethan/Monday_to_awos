@@ -73,7 +73,7 @@ async def get_group_items():
             result.append({
                 #"item_id": item["id"],
                 #"name": item["name"],
-                "item_num": i + "\n" 
+                "item_num": " ".join(i + "\n") 
                 name
                 location
                 supervisor
