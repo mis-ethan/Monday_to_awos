@@ -55,9 +55,9 @@ async def get_group_items():
         raise HTTPException(status_code=500, detail="Error from Monday API")
 
     data = response.json()
+    return data 
     try:
-        items = data["data"]["data"]["boards"][0]["groups"][0]["items"]
-        return items
+        items = data["data"]["boards"][0]["groups"][0]["items"]
         result = []
         for item in items:
             result.append({
