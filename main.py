@@ -13,6 +13,7 @@ MONDAY_API_URL = 'https://api.monday.com/v2'
 
 app = FastAPI()
 
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to my API: " + API_KEY}
@@ -59,10 +60,23 @@ async def get_group_items():
     try:
         items = data["data"]["boards"][0]["groups"][0]["items_page"]["items"]
         result = []
+        i=1
         for item in items:
+            i+=1
+            for col in item["column_values"]:
+              if col["id"] == "text":
+                name = {"name": col["text"]}
+              if col["id"] == "location_mknyj9pk":
+                location = {"location": col["text"]}
+              if col["id"] == "email_mkt4w5k":
+                supervisor = {"supervisor": col["text"]}
             result.append({
-                "item_id": item["id"],
-                "name": item["name"],
+                #"item_id": item["id"],
+                #"name": item["name"],
+                "item_num": i + "\n" 
+                name
+                location
+                supervisor
                 #"columns": {col["title"]: col["text"] for col in item["column_values"]}
             })
         return result
