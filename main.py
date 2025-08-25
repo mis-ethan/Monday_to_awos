@@ -32,7 +32,6 @@ async def get_group_items():
               name
               column_values {
                 id
-                title
                 text
               }
             }
