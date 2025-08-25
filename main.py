@@ -58,6 +58,7 @@ async def get_group_items():
     data = response.json()
     try:
         items = data["data"]["boards"][0]["groups"][0]["items_page"]["items"]
+        return items
         result = []
         for item in items:
             result.append({
