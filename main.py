@@ -65,18 +65,18 @@ async def get_group_items():
             i+=1
             for col in item["column_values"]:
               if col["id"] == "text":
-                name = {"name": col["text"]}
+                name = col["text"]
               if col["id"] == "location_mknyj9pk":
-                location = {"location": col["text"]}
+                location = col["text"]
               if col["id"] == "email_mkt4w5k":
-                supervisor = {"supervisor": col["text"]}
+                supervisor = col["text"]
             result.append({
                 #"item_id": item["id"],
                 #"name": item["name"],
                 "item_num": i + "\n", 
-                name,
-                location,
-                supervisor,
+                "name": name,
+                "location": location,
+                "supervisor": supervisor,
                 #"columns": {col["title"]: col["text"] for col in item["column_values"]}
             })
         return result
