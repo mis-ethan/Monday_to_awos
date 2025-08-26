@@ -4,9 +4,9 @@ import json
 from fastapi import FastAPI
 from fastapi import HTTPException
 
-API_KEY = os.getenv("MONDAY_API_TOKEN")
-IPAD_BOARD = os.getenv("IPAD_DEPLOYMENT_BOARD")
-REQUEST_GROUP = "group_mkt4473j"
+API_KEY = os.getenv("MONDAY_API_KEY")
+IPAD_BOARD = os.getenv("MONDAY_BOARD_ID")
+REQUEST_GROUP = "MONDAY_GROUP_ID"
 
 MONDAY_API_URL = 'https://api.monday.com/v2'
 
