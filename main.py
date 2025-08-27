@@ -4,12 +4,15 @@ import json
 from fastapi import FastAPI
 from fastapi import HTTPException
 
+#board and group info
 API_KEY = os.getenv("MONDAY_API_KEY")
-IPAD_BOARD = os.getenv("MONDAY_BOARD_ID")
+BOARD_ID = os.getenv("MONDAY_BOARD_ID")
 REQUEST_GROUP = "MONDAY_GROUP_ID"
 
 MONDAY_API_URL = 'https://api.monday.com/v2'
 
+#enter ids of all columns wanted in return
+column_ids = ["text"]
 
 app = FastAPI()
 
@@ -21,7 +24,7 @@ def read_root():
 
 @app.get("/create-workorders/")
 async def get_group_items():
-    board_id = IPAD_BOARD
+    board_id = BOARD_ID
     group_id = REQUEST_GROUP
     query = """
     query ($board_id: ID!, $group_id: String!) {
@@ -32,6 +35,9 @@ async def get_group_items():
               id
               name
               column_values {
+                column{
+                  title
+                }
                 id
                 text
               }
@@ -61,24 +67,15 @@ async def get_group_items():
         items = data["data"]["boards"][0]["groups"][0]["items_page"]["items"]
         result = []
         i=1
+        col_vals = {"item_num": f"# {i} \n"}
         for item in items:
             i+=1
-            for col in item["column_values"]:
-              if col["id"] == "text":
-                name = col["text"]
-              if col["id"] == "location_mknyj9pk":
-                location = col["text"]
-              if col["id"] == "email_mkt4w5k":
-                supervisor = col["text"]
-            result.append({
-                #"item_id": item["id"],
-                #"name": item["name"],
-                "item_num": f"# {i} \n", 
-                "name": name,
-                "location": location,
-                "supervisor": supervisor,
-                #"columns": {col["title"]: col["text"] for col in item["column_values"]}
-            })
+            for col_id in column_ids
+              for col in item["column_values"]:
+                if col["id"] == col_id:
+                  col_vals.append({col["column"]["text"] : col["text"]})
+            result.append(col_vals)
+            
         return result
     except (KeyError, IndexError) as e:
         raise HTTPException(status_code=500, detail="Error parsing Monday API response")
